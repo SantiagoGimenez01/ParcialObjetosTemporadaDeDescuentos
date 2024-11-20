@@ -17,6 +17,7 @@ class Juego{
   const property precioOriginal
   var descuento
   const property caracteristicas
+  const criticas =[]
 
   method precio() = descuento.aplicar(precioOriginal)
   method cambiarDescuento(otro){
@@ -24,7 +25,13 @@ class Juego{
   }
   method seAcercaA(juegoMasCaro) = precioOriginal > juegoMasCaro.precioOriginal() * 0.75
   method esAptoParaMenoresEn(pais) = pais.puedenJugarMenoresA(caracteristicas)
-
+  method recibirCritica(critica){ critica.criticar(self) }
+  method agregarCritica(critica){
+    criticas.add(critica)
+  }
+  method pasaUmbralDe(cantidad) = criticas.count({critica => critica.esPositiva(self)}) > cantidad
+  method galardoneadoPorEstim() = criticas.all({critica => critica.esPositiva(self)})
+  method tieneCriticosLiterarios() = criticas.any({critica => critica.contenido().size() > 100})
 }
 
 class Caracteristicas{
