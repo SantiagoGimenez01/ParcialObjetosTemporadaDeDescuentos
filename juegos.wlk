@@ -17,7 +17,7 @@ class Juego{
   const property precioOriginal
   var descuento
   const property caracteristicas
-  const criticas =[]
+  const criticas = []
 
   method precio() = descuento.aplicar(precioOriginal)
   method cambiarDescuento(otro){

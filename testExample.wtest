@@ -1,0 +1,24 @@
+import criticas.*
+import juegos.*
+import paises.*
+import descuentos.*
+
+describe "Testo de criticas" {
+    const juegoCar = new Caracteristicas()
+    const criticaUsuario = new Usuario(contenido = "SI")
+    const unJuego = new Juego(precioOriginal = 150, descuento = sinDescuento, caracteristicas = juegoCar, criticas = [])
+    const criticaPaga = new CriticoPago(juegosQuePagaron = [unJuego], contenido = "Muy bueno")
+  test "Juego pasa el umbral de una critica positiva"{
+    unJuego.agregarCritica(criticaPaga)
+    unJuego.agregarCritica(criticaUsuario)
+    assert.that(unJuego.pasaUmbralDe(1))
+  }
+  test "El juego es galardoneado por estim"{
+    unJuego.agregarCritica(criticaPaga)
+    assert.that(unJuego.galardoneadoPorEstim())
+  }
+  test "El juego no tiene criticos literarios"{
+    unJuego.agregarCritica(criticaPaga)
+    assert.notThat(unJuego.tieneCriticosLiterarios())
+  }
+}

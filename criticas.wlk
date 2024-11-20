@@ -1,27 +1,29 @@
-class Usuario{
-    var property contenido = "SI"
-    
+class Critico{
+
+    method esPositiva(juego)
     method criticar(juego){
         juego.agregarCritica(self)
     }
-    method esPositiva(juego) = contenido == "Si"
+}
+
+class Usuario inherits Critico{
+    var property contenido = "SI"
+
+    override method esPositiva(juego) = contenido == "SI"
 }
 
 
-class CriticoPago{
+class CriticoPago inherits Critico{
     const juegosQuePagaron = []
     var property contenido = "elkvmlfdkvml"
 
-    method criticar(juego){
-        juego.agregarCritica(self)
-    }
-    method esPositiva(juego) = juegosQuePagaron.contains(juego)
+    override method esPositiva(juego) = juegosQuePagaron.contains(juego)
 }
 
-class Revista{
+class Revista inherits Critico{
     const criticos = []
  
     method contenido() = criticos.sum({criticos => criticos.contenido()})
     method mayoria() = criticos/2.roundUp()
-    method esPositiva(juego) = criticos.count({critico => critico.esPositiva()}) >= self.mayoria()
+    override method esPositiva(juego) = criticos.count({critico => critico.esPositiva()}) >= self.mayoria()
 }
