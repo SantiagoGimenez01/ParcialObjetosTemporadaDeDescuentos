@@ -16,10 +16,19 @@ object steam{
 class Juego{
   const property precioOriginal
   var descuento
+  const property caracteristicas
 
   method precio() = descuento.aplicar(precioOriginal)
   method cambiarDescuento(otro){
     descuento = otro
   }
   method seAcercaA(juegoMasCaro) = precioOriginal > juegoMasCaro.precioOriginal() * 0.75
+  method esAptoParaMenoresEn(pais) = pais.puedenJugarMenoresA(caracteristicas)
+
+}
+
+class Caracteristicas{
+  const property lenguajeInapropiado = false
+  const property violencia = false 
+  const property tematicaAdulta = false 
 }
